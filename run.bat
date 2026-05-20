@@ -2,33 +2,58 @@
 chcp 65001 > nul
 title Plants vs Zombies - OOP Lab
 
-echo Compiling game...
+:: Định nghĩa thư mục
+set SRC_DIR=src
+set OUT_DIR=out
+set LIB_DIR=lib
 
-cd /d "C:\Users\thedu\Downloads\PVZUpdate\PVZ_OOP-LAB_project-master"
+:: Tạo thư mục out nếu chưa tồn tại
+if not exist "%OUT_DIR%" mkdir "%OUT_DIR%"
 
-dir /s /b src\*.java > sources.txt
+echo ========================================
+echo   Plants vs Zombies - Compiler
+echo ========================================
+echo.
+echo [1/3] Dang tim file nguon...
 
-javac -cp ".;src" -d . @sources.txt 2> compile_error.txt
+:: Tìm tất cả file .java trong thư mục src
+dir /s /b "%SRC_DIR%\*.java" > sources.txt
 
+echo [2/3] Dang bien dich...
+
+:: Biên dịch vào thư mục out
+javac -cp "%SRC_DIR%" -d "%OUT_DIR%" @sources.txt 2> compile_error.txt
+
+:: Kiểm tra lỗi biên dịch
 if %errorlevel% neq 0 (
     echo.
-    echo ====== COMPILATION ERROR ======
+    echo ====== LOI BIEN DICH ======
+    echo.
     type compile_error.txt
     del sources.txt compile_error.txt 2> nul
     echo.
-    pause
+    echo Nhan phim bat ky de thoat...
+    pause > nul
     exit /b 1
 )
 
 del sources.txt compile_error.txt 2> nul
 
-echo Compilation successful!
-echo Running game...
+echo [3/3] Bien dich thanh cong!
+echo.
+echo Dang chay game...
 
-java -cp . Main
+:: Chạy game từ thư mục out
+java -cp "%OUT_DIR%" Main
 
+:: Kiểm tra lỗi khi chạy
 if %errorlevel% neq 0 (
     echo.
-    echo Game encountered an error while running!
-    pause
+    echo ====== LOI KHI CHAY ======
+    echo.
+    echo Nhan phim bat ky de thoat...
+    pause > nul
 )
+
+:: Xóa thư mục out? (tùy chọn, bỏ comment dòng dưới nếu muốn)
+:: rmdir /s /q "%OUT_DIR%" 2> nul
