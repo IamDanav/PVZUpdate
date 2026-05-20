@@ -4,7 +4,7 @@ title Plants vs Zombies - OOP Lab
 
 :: Định nghĩa thư mục
 set SRC_DIR=src
-set OUT_DIR=compiled_classes
+set OUT_DIR=out
 set LIB_DIR=lib
 
 :: Tạo thư mục out nếu chưa tồn tại
