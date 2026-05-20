@@ -1,11 +1,11 @@
 package Core;
-import java.util.ArrayList;
 import Entities.Bullet;
 import Entities.LawnMower;
+import Entities.Sun;
+import Entities.Zombie.*;
 import Entities.Zombies;
 import Map.Grid;
-import Entities.Zombie.*;
-import Entities.Sun;
+import java.util.ArrayList;
 
 public class Game {
     private static Game instance;
