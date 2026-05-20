@@ -1,13 +1,13 @@
 @echo off
 chcp 65001 > nul
+cd /d "%~dp0"
 title Plants vs Zombies - OOP Lab
 
 :: Định nghĩa thư mục
 set SRC_DIR=src
-set OUT_DIR=out
-set LIB_DIR=lib
+set OUT_DIR=compiled_classes
 
-:: Tạo thư mục out nếu chưa tồn tại
+:: Tạo thư mục compiled_classes nếu chưa tồn tại
 if not exist "%OUT_DIR%" mkdir "%OUT_DIR%"
 
 echo ========================================
@@ -16,15 +16,30 @@ echo ========================================
 echo.
 echo [1/3] Dang tim file nguon...
 
-:: Tìm tất cả file .java trong thư mục src
-dir /s /b "%SRC_DIR%\*.java" > sources.txt
+:: Kiểm tra tồn tại thư mục src
+if not exist "%SRC_DIR%\Main.java" (
+    echo Khong tim thay %SRC_DIR%\Main.java
+    echo Vui long chay file bat trong thu muc goc cua project
+    pause
+    exit /b 1
+)
 
-echo [2/3] Dang bien dich...
+:: Tìm tất cả file .java
+dir /s /b "%SRC_DIR%\*.java" > sources.txt 2> nul
 
-:: Biên dịch vào thư mục out
+:: Kiểm tra file sources.txt có trống không
+for %%A in (sources.txt) do if %%~zA==0 (
+    echo Khong tim thay file .java nao!
+    del sources.txt 2> nul
+    pause
+    exit /b 1
+)
+
+echo [2/3] Dang bien dich vao thu muc %OUT_DIR%...
+
+:: Biên dịch
 javac -cp "%SRC_DIR%" -d "%OUT_DIR%" @sources.txt 2> compile_error.txt
 
-:: Kiểm tra lỗi biên dịch
 if %errorlevel% neq 0 (
     echo.
     echo ====== LOI BIEN DICH ======
@@ -32,8 +47,7 @@ if %errorlevel% neq 0 (
     type compile_error.txt
     del sources.txt compile_error.txt 2> nul
     echo.
-    echo Nhan phim bat ky de thoat...
-    pause > nul
+    pause
     exit /b 1
 )
 
@@ -43,17 +57,12 @@ echo [3/3] Bien dich thanh cong!
 echo.
 echo Dang chay game...
 
-:: Chạy game từ thư mục out
+:: Chạy game
 java -cp "%OUT_DIR%" Main
 
-:: Kiểm tra lỗi khi chạy
 if %errorlevel% neq 0 (
     echo.
     echo ====== LOI KHI CHAY ======
     echo.
-    echo Nhan phim bat ky de thoat...
-    pause > nul
+    pause
 )
-
-:: Xóa thư mục out? (tùy chọn, bỏ comment dòng dưới nếu muốn)
-:: rmdir /s /q "%OUT_DIR%" 2> nul
