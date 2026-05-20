@@ -5,7 +5,8 @@ import Entities.Sun;
 import Entities.Zombie.*;
 import Entities.Zombies;
 import Map.Grid;
-import java.util.ArrayList; //test synchronized list
+import java.util.ArrayList;
+
 public class Game {
     private static Game instance;
     public ArrayList<Bullet> bullets = new ArrayList<>();
