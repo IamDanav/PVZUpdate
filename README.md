@@ -92,8 +92,7 @@ The game features multiple plant and zombie types, projectile combat, sun econom
 ---
 # Screenshots
 
-
-<img width="792" height="495" alt="image" src="https://github.com/user-attachments/assets/77d8a363-0ff9-44e7-a567-d810e3061a50" />
+<img width="1787" height="808" alt="image" src="https://github.com/user-attachments/assets/c8ce7bd9-4d19-456d-a420-f0d4f8dbb146" />
 
 
 ---
