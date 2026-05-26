@@ -70,8 +70,8 @@ The game features multiple plant and zombie types, projectile combat, sun econom
 # How To Run
 
 1. Clone the repository
-2. Open the project in IntelliJ IDEA
-3. Run `Main.java`
+2. Extract zip file 
+3. Run run.bat file for window
 
 ---
 
